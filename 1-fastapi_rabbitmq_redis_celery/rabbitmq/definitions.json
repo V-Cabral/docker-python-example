@@ -1,0 +1,62 @@
+{
+  "rabbit_version": "3.13.0",
+  "rabbitmq_version": "3.13.0",
+  "users": [
+    {
+      "name": "admin",
+      "password_hash": "9PMhmEOTNxxq82KTKHeq9nT67x6qN+3sl8gj8FWg1sxWfak0",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "administrator"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "admin",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [],
+  "policies": [],
+  "queues": [
+    {
+      "name": "image_queue",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {
+        "x-queue-mode": "lazy",
+        "x-queue-type": "classic"
+      }
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "amq.direct",
+      "vhost": "/",
+      "type": "amq",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "amq.direct",
+      "vhost": "/",
+      "destination": "image_queue",
+      "destination_type": "queue",
+      "routing_key": "image_queue",
+      "arguments": {}
+    }
+  ]
+}
